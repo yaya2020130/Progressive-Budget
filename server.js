@@ -1,7 +1,7 @@
-const express = require("./node_modules/express");
-const logger = require("./node_modules/morgan");
+const express = require("express");
+const logger = require("/morgan");
 const mongoose = require("mongoose");
-const compression = require("./node_modules/compression");
+const compression = require("compression");
 
 const PORT = process.env.PORT || 3000;
 
