@@ -1,3 +1,4 @@
+//index db
 const indexedDB =
   window.indexedDB ||
   window.mozIndexedDB ||
@@ -8,6 +9,7 @@ const indexedDB =
 let db;
 const request = indexedDB.open("budget", 1);
 
+//fires the first time or when version number changes 
 request.onupgradeneeded = ({ target }) => {
   let db = target.result;
   db.createObjectStore("pending", { autoIncrement: true });
@@ -26,6 +28,7 @@ request.onerror = function(event) {
   console.log("Woops! " + event.target.errorCode);
 };
 
+//save record to pending 
 function saveRecord(record) {
   const transaction = db.transaction(["pending"], "readwrite");
   const store = transaction.objectStore("pending");
@@ -61,5 +64,5 @@ function checkDatabase() {
   };
 }
 
-// listen for app coming back online
+// listen for app coming back online & check for pending 
 window.addEventListener("online", checkDatabase);
